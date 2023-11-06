@@ -189,8 +189,10 @@
             <div class="col-12">
               <label class="col-sm-12 col-form-label">Academic Unit:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="accUnit" id="accUnit" th:field="*{accUnit}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="accUnit" id="accUnit" th:field="*{accUnit.acc_id}">
+                  <th:block th:each="acadUnit: ${academicUnits}">
+                    <option th:if="${acadUnit.unit.name == 'DEPARTMENT'}" th:value="${acadUnit.acc_id}">[[${acadUnit.name}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
@@ -198,24 +200,30 @@
             <div class="col-12">
               <label class="col-sm-12 col-form-label">Course Definition:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="courseDefinition" id="courseDefinition" th:field="*{courseDefinition}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="courseDefinition" id="courseDefinition" th:field="*{courseDefinition.course_def_Id}">
+                  <th:block th:each="courseDef: ${courseDefinitions}">
+                    <option th:value="${courseDef.course_def_Id}">[[${courseDef.courseName}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
             <div class="col-12">
               <label class="col-sm-12 col-form-label">Tutor:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="tutor" id="tutor" th:field="*{tutor}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="tutor" id="tutor" th:field="*{tutor.idTeach}">
+                  <th:block th:each="tut: ${teachers}">
+                    <option th:value="${tut.idTeach}">[[${tut.namesTeach}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
             <div class="col-12">
               <label class="col-sm-12 col-form-label">Assistant:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="assistant" id="assistant" th:field="*{assistant}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="assistant" id="assistant" th:field="*{assistant.idTeach}">
+                  <th:block th:each="assist: ${teachers}">
+                    <option th:value="${assist.idTeach}">[[${assist.namesTeach}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
@@ -223,8 +231,10 @@
             <div class="col-12">
               <label class="col-sm-12 col-form-label">Semester:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="semester" id="semester" th:field="*{semester}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="semester" id="semester" th:field="*{semester.semID}">
+                  <th:block th:each="sem: ${semesters}">
+                    <option th:value="${sem.semID}">[[${sem.semCode}]] - [[${sem.semNames}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
@@ -271,11 +281,11 @@
                 <tbody>
                 <tr th:each="course:${courses}">
                   <td th:text="${course.course_id}" hidden="true"></td>
-                  <td th:text="${course.accUnit}"></td>
-                  <td th:text="${course.courseDefinition}"></td>
-                  <td th:text="${course.tutor}"></td>
-                  <td th:text="${course.assistant}"></td>
-                  <td th:text="${course.semester}"></td>
+                  <td th:text="${course.accUnit.name}"></td>
+                  <td th:text="${course.courseDefinition.courseName}"></td>
+                  <td th:text="${course.tutor.namesTeach}"></td>
+                  <td th:text="${course.assistant.namesTeach}"></td>
+                  <td th:text="${course.semester.semNames}"></td>
                 </tr>
                 </tbody>
               </table>
