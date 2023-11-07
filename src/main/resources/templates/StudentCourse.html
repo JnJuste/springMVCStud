@@ -186,18 +186,22 @@
           <!-- Vertical Form -->
           <form class="row g-3" th:action="@{/studentCourses/new}" method="post" th:object="${studentCourse}">
             <div class="col-12">
-              <label class="col-sm-12 col-form-label">Course:</label>
+              <label class="col-sm-12 col-form-label">Student:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="course" id="course" th:field="*{course}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="studentRegistration" id="studentRegistration" th:field="*{studentRegistration.studReg_id}">
+                  <th:block th:each="stud: ${studentRegistrations}">
+                    <option th:value="${stud.studReg_id}">[[${stud.student.regNo}]] - [[${stud.student.studNames}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
             <div class="col-12">
-              <label class="col-sm-12 col-form-label">Academic Unit:</label>
+              <label class="col-sm-12 col-form-label">Course:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="studentRegistration" id="studentRegistration" th:field="*{studentRegistration}">
-                  <option value="">SELECT</option>
+                <select class="form-select" name="course" id="course" th:field="*{course.course_id}">
+                  <th:block th:each="cour: ${courses}">
+                    <option th:value="${cour.course_id}">[[${cour.courseDefinition.courseCode}]] - [[${cour.courseDefinition.courseName}]]</option>
+                  </th:block>
                 </select>
               </div>
             </div>
@@ -243,8 +247,8 @@
                 <thead>
                 <tr>
                   <th scope="col" hidden="true">ID</th>
-                  <th scope="col">COURSE NAME</th>
                   <th scope="col">STUDENT NAME</th>
+                  <th scope="col">COURSE NAME</th>
                   <th scope="col">RESULTS</th>
                   <th scope="col">CREDITS</th>
                 </tr>
@@ -252,8 +256,8 @@
                 <tbody>
                 <tr th:each="studentCourse:${studentCourses}">
                   <td th:text="${studentCourse.stud_CourseId}" hidden="true"></td>
-                  <td th:text="${studentCourse.course}"></td>
-                  <td th:text="${studentCourse.studentRegistration}"></td>
+                  <td th:text="${studentCourse.studentRegistration.student.studNames}"></td>
+                  <td th:text="${studentCourse.course.courseDefinition.courseName}"></td>
                   <td th:text="${studentCourse.results}"></td>
                   <td th:text="${studentCourse.credits}"></td>
                 </tr>
