@@ -24,5 +24,4 @@ public class StudentCourse {
     private StudentRegistration studentRegistration;
     private BigDecimal results;
     private Integer credits;
-
 }
