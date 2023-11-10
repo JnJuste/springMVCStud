@@ -30,6 +30,7 @@ public class StudentController {
         return "Student";
     }
 
+
     @PostMapping("/students/new")
     public String saveStudent(@ModelAttribute("student") Student student) {
         studentService.saveStudent(student);
