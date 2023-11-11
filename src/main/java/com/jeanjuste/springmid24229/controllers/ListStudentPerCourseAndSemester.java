@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ListController {
-    @GetMapping("/lists")
-    public String getList(Model model){
+public class ListStudentPerCourseAndSemester {
+    @GetMapping("/listStudentPerCourseAndSemester")
+    public String getCoursePerStudent(Model model){
         return "List";
     }
 }
