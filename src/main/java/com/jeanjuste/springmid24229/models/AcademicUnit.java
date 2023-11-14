@@ -22,5 +22,4 @@ public class AcademicUnit {
     private String name;
     @Enumerated(EnumType.STRING)
     private EAcademicUnit unit;
-
 }

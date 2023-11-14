@@ -22,5 +22,4 @@ public class Student {
     private String regNo;
     private String studNames;
     private LocalDate dateOfBirth;
-
 }

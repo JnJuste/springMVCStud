@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>STUDENT MANAGEMENT PAGE</title>
+  <title>LIST COURSE PER STUDENT</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -155,6 +155,39 @@
 
       <li class="nav-heading">Others</li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#listing-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-box-arrow-in-right"></i><span>LISTS</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="listing-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a class="" th:href="@{/listCoursePerStudent}">
+              <i class="bi bi-circle"></i><span>List Courses Per Student</span>
+            </a>
+          </li>
+          <li>
+            <a class="" th:href="@{/listStudentPerSemester}">
+              <i class="bi bi-circle"></i><span>List Student Per Semester</span>
+            </a>
+          </li>
+          <li>
+            <a class="" th:href="@{/listStudentPerCourseAndSemester}">
+              <i class="bi bi-circle"></i><span>List Student Per Course And Semester</span>
+            </a>
+          </li>
+          <li>
+            <a class="" th:href="@{/listStudentPerDepartmentAndSemester}">
+              <i class="bi bi-circle"></i><span>List Student Per Department And Semester</span>
+            </a>
+          </li>
+          <li>
+            <a class="" th:href="@{/listCoursePerDepartmentAndSemester}">
+              <i class="bi bi-circle"></i><span>List Course Per Department And Semester</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
       <!--<li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
@@ -162,12 +195,12 @@
         </a>
       </li> End Register Page Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" th:href="@{/lists}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Lists</span>
         </a>
-      </li> <!--End Login Page Nav -->
+      </li> End Login Page Nav -->
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -175,7 +208,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>AUCA FINAL LISTING PAGE</h1>
+      <h1>LIST COURSE PER STUDENT</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -184,8 +217,21 @@
           <h5 class="card-title">Listing Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/students/new}" method="post">
-
+          <form class="row g-3" method="get" th:action="@{/listCoursePerStudent}" th:object="${studentRegistration}">
+            <div class="col-12">
+              <label class="col-sm-12 col-form-label">CHOOSE THE STUDENT:</label>
+              <div class="col-sm-12">
+                <select class="form-select" name="studReg_id" id="studReg_id" th:field="*{studReg_id}">
+                  <th:block th:each="stud: ${studentRegistrations}">
+                    <option th:if="${stud.studReg_id}" th:value="${stud.studReg_id}">[[${stud.student.regNo}]] - [[${stud.student.studNames}]]</option>
+                  </th:block>
+                </select>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Find</button>
+              <!--<button type="reset" class="btn btn-secondary">Reset</button> -->
+            </div>
           </form><!-- Vertical Form -->
 
         </div>
@@ -207,25 +253,27 @@
 
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">CHOOSE BELOW THE LIST TO VIEW:</h5>
+                <!--<h5 class="card-title">CHOOSE BELOW THE LIST TO VIEW:</h5>
                 <p></p>
 
-                <!-- Table with stripped rows -->
+                 Table with stripped rows -->
                 <table class="table datatable">
                   <thead>
                   <tr>
-                    <th scope="col" hidden="true">STUDENT ID</th>
-                    <th scope="col">STUDENT CODE</th>
-                    <th scope="col">STUDENT NAME</th>
-                    <th scope="col">DATE OF BIRTH</th>
+                    <th scope="col" hidden="true">COURSE ID</th>
+                    <th scope="col">COURSE CODE</th>
+                    <th scope="col">COURSE NAME</th>
+                    <th scope="col">CREDITS</th>
+                    <th scope="col">RESULTS</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="student:${students}">
-                    <td th:text="" hidden="true"></td>
-                    <td th:text=""></td>
-                    <td th:text=""></td>
-                    <td th:text=""></td>
+                  <tr th:each="cour: ${courseList}">
+                    <td th:text="${cour.stud_CourseId}" hidden="true"></td>
+                    <td th:text="${cour.course.courseDefinition.courseCode}"></td>
+                    <td th:text="${cour.course.courseDefinition.courseName}"></td>
+                    <td th:text="${cour.credits}"></td>
+                    <td th:text="${cour.results}"></td>
                   </tr>
                   </tbody>
                 </table>

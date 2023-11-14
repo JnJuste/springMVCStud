@@ -9,4 +9,5 @@ import java.util.List;
 public interface StudentRegistrationService {
     List<StudentRegistration> findAllStudentRegistrations();
     StudentRegistration saveStudentRegistration(StudentRegistration studentRegistration);
+
 }

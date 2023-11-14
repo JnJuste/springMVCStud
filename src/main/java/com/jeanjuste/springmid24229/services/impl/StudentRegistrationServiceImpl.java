@@ -9,6 +9,7 @@ import com.jeanjuste.springmid24229.services.StudentRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 @Service

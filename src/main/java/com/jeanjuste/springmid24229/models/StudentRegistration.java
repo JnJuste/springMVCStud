@@ -27,5 +27,4 @@ public class StudentRegistration {
     @Enumerated(EnumType.STRING)
     private ERegistrationStatus eRegistrationStatus;
     private LocalDate registrationDate;
-
 }

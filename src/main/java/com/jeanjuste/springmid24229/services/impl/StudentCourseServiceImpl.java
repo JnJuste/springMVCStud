@@ -1,6 +1,7 @@
 package com.jeanjuste.springmid24229.services.impl;
 
 import com.jeanjuste.springmid24229.models.StudentCourse;
+import com.jeanjuste.springmid24229.models.StudentRegistration;
 import com.jeanjuste.springmid24229.repositories.CourseRepository;
 import com.jeanjuste.springmid24229.repositories.StudentCourseRepository;
 import com.jeanjuste.springmid24229.repositories.StudentRegistrationRepository;
@@ -8,7 +9,9 @@ import com.jeanjuste.springmid24229.services.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.rmi.RemoteException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StudentCourseServiceImpl implements StudentCourseService {
@@ -33,4 +36,6 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     public StudentCourse saveStudentCourse(StudentCourse studentCourse) {
         return studentCourseRepository.save(studentCourse);
     }
+
+
 }
