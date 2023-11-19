@@ -29,15 +29,15 @@ public class ListController {
         this.studentCourseRepository = studentCourseRepository;
         this.studentRegistrationRepository = studentRegistrationRepository;
     }
-    @GetMapping
+    @GetMapping("/listCoursePerStudent")
     public String allLists(Model model) {
-        UUID courseId = UUID.fromString("courseId");
+        UUID course_ID = UUID.fromString("courseId");
         UUID studentId = UUID.fromString("stud_id");
         UUID departmentId = UUID.fromString("dep_id");
         UUID semesterId = UUID.fromString("semId");
         UUID departAccID = UUID.fromString("accId");
 
-        List<Object[]> listOfStudentsByCourse = studentCourseRepository.getStudentsByCourse(courseId);
+        List<Object[]> listOfStudentsByCourse = studentCourseRepository.getStudentsByCourse(course_ID);
         List<Object[]> listOfCoursesByStudent = studentCourseRepository.getCoursesByStudent(studentId);
         List<Object[]> listOfCoursesByDepartment = courseRepository.getCoursesByDepartment(departmentId);
         List<Object[]> listOfStudentsBySemester = studentRegistrationRepository.getStudentsBySemester(semesterId);
@@ -49,12 +49,6 @@ public class ListController {
         model.addAttribute("listOfStudentsBySemester", listOfStudentsBySemester);
         model.addAttribute("listOfStudentsByDepartment", listOfStudentsByDepartment);
 
-        return "listing";
-    }
-    @GetMapping("/listCoursePerStudent")
-    public String getCoursePerStudent(Model model){
-
-        model.addAttribute("studentRegistration", new StudentRegistration());
         return "listCoursePerStudent";
     }
 

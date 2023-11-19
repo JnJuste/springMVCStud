@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -26,5 +27,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+    @Override
+    public void updateStudent(Student student) {
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void deleteStudent(UUID studId) {
+        studentRepository.deleteById(studId);
     }
 }
