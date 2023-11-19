@@ -58,6 +58,7 @@
       </form>
     </div> End Search Bar -->
 
+
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
@@ -222,31 +223,39 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>STUDENT PAGE</h1>
+      <h1>PAYMENTS</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Student Form</h5>
+          <h5 class="card-title">Payment Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/students/new}" method="post" th:object="${student}">
+          <form class="row g-3" th:action="@{/payments/new}" method="post" th:object="${payment}">
             <div class="col-12">
-              <label for="inputCode" class="form-label">Student Code:</label>
-              <input type="text" class="form-control" id="inputCode" name="regNo" th:field="*{regNo}">
-            </div>
-            <div class="col-12">
-              <label for="inputNames" class="form-label">Student Names:</label>
-              <input type="text" class="form-control" id="inputNames" name="studNames" th:field="*{studNames}">
+              <label class="col-sm-12 col-form-label">Student ID & Name:</label>
+              <div class="col-sm-12">
+                <select class="form-select" name="studentRegistration" id="studentRegistration" th:field="*{studentRegistration.studReg_id}">
+                  <th:block th:each="stud: ${studentRegistrations}">
+                    <option th:value="${stud.studReg_id}">[[${stud.student.regNo}]] - [[${stud.student.studNames}]]</option>
+                  </th:block>
+                </select>
+              </div>
             </div>
 
             <div class="col-12">
-              <label for="inputDate" class="form-label">Date of Birth:</label>
-              <input type="date" class="form-control" id="inputDate" name="dateOfBirth" th:field="*{dateOfBirth}">
+              <label for="inputDate" class="form-label">Payment Date:</label>
+              <input type="date" class="form-control" id="inputDate" name="dateOfBirth" th:field="*{paymentDate}">
             </div>
+
+            <div class="col-12">
+              <label for="amount" class="form-label">Amount:</label>
+              <input type="text" class="form-control" id="amount" name="amount" th:field="*{amount}">
+            </div>
+
             <div class="text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Confirm</button>
               <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
           </form><!-- Vertical Form -->
@@ -257,53 +266,52 @@
 
 
     <div class="pagetitle">
-        <h1>STUDENT TABLE</h1>
-        <nav>
-          <ol class="breadcrumb">
-          </ol>
-        </nav>
-      </div><!-- End Page Title -->
+      <h1>PAYMENT TABLE</h1>
+      <nav>
+        <ol class="breadcrumb">
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-12">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
 
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">LIST OF STUDENTS</h5>
-                <p></p>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">LIST OF STUDENT PAYMENTS</h5>
+              <p></p>
 
-                <!-- Table with stripped rows -->
-                <table class="table datatable">
-                  <thead>
-                  <tr>
-                    <th scope="col" hidden="true">STUDENT ID</th>
-                    <th scope="col">STUDENT CODE</th>
-                    <th scope="col">STUDENT NAME</th>
-                    <th scope="col">DATE OF BIRTH</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="student:${students}">
-                    <td th:text="${student.student_id}" hidden="true"></td>
-                    <td th:text="${student.regNo}"></td>
-                    <td th:text="${student.studNames}"></td>
-                    <td th:text="${student.dateOfBirth}"></td>
-                  </tr>
-                  </tbody>
-                </table>
-                <!-- End Table with stripped rows -->
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                <tr>
+                  <th scope="col" hidden="true">ID</th>
+                  <th scope="col">STUDENT NAME</th>
+                  <th scope="col">PAYMENT DATE</th>
+                  <th scope="col">AMOUNT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="payment:${payments}">
+                  <td th:text="${payment.paymentID}" hidden="true"></td>
+                  <td th:text="${payment.studentRegistration.student.studNames}"></td>
+                  <td th:text="${payment.paymentDate}"></td>
+                  <td th:text="${payment.amount}"></td>
+                </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
 
-              </div>
             </div>
-
           </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
 
   </main><!-- End #main -->
-
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

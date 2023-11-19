@@ -1,6 +1,7 @@
 package com.jeanjuste.springmid24229.services.impl;
 
 import com.jeanjuste.springmid24229.models.Payment;
+import com.jeanjuste.springmid24229.models.StudentRegistration;
 import com.jeanjuste.springmid24229.repositories.PaymentRepository;
 import com.jeanjuste.springmid24229.repositories.StudentRegistrationRepository;
 import com.jeanjuste.springmid24229.services.PaymentService;

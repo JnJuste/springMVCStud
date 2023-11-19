@@ -18,6 +18,7 @@ import java.util.UUID;
 @Table(name = "payment")
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID paymentID;
     @OneToOne
     private StudentRegistration studentRegistration;
