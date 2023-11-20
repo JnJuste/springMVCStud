@@ -26,7 +26,7 @@ public class SemesterController {
         List<Semester> semesters = semesterService.findAllSemesters();
         model.addAttribute("semesters", semesters);
         model.addAttribute("semester", semester);
-        return "Semester";
+        return "Semester/Semester";
     }
 
     @PostMapping("/semesters/new")

@@ -1,38 +1,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="/header"></th:block>
+<th:block th:include="/components/header"></th:block>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>ACADEMIC UNIT PAGE</h1>
+      <h1>COURSE DEFINITION PAGE</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Academic Unit Form</h5>
+          <h5 class="card-title">Course Definition Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/academicUnits/new}" method="post" th:object="${academicUnit}">
+          <form class="row g-3" th:action="@{/courseDefinitions/new}" method="post" th:object="${courseDefinition}">
             <div class="col-12">
               <label for="inputCode" class="form-label">Code Number:</label>
-              <input type="text" class="form-control" id="inputCode" name="acc_id" th:field="*{acc_codeNumb}">
+              <input type="text" class="form-control" id="inputCode" name="courseCode" th:field="*{courseCode}">
             </div>
             <div class="col-12">
               <label for="inputNames" class="form-label">Name:</label>
-              <input type="text" class="form-control" id="inputNames" name="name" th:field="*{name}">
+              <input type="text" class="form-control" id="inputNames" name="courseName" th:field="*{courseName}">
             </div>
-
             <div class="col-12">
-              <label class="col-sm-12 col-form-label">Unit:</label>
-              <div class="col-sm-12">
-                <select class="form-select" name="unit" id="unit" th:field="*{unit}">
-                  <option value="">SELECT</option>
-                  <option value="PROGRAM">PROGRAM</option>
-                  <option value="FACULTY">FACULTY</option>
-                  <option value="DEPARTMENT">DEPARTMENT</option>
-                </select>
-              </div>
+              <label for="inputDescription" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="inputDescription" name="description" th:field="*{description}">
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -45,7 +37,7 @@
     </section>
 
     <div class="pagetitle">
-      <h1>ACADEMIC UNIT TABLE</h1>
+      <h1>COURSE DEFINITION TABLE</h1>
       <nav>
         <ol class="breadcrumb">
         </ol>
@@ -58,7 +50,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">LIST OF ACADEMIC UNITS</h5>
+              <h5 class="card-title">LIST OF COURSE DEFINITIONS</h5>
               <p></p>
 
               <!-- Table with stripped rows -->
@@ -66,17 +58,17 @@
                 <thead>
                 <tr>
                   <th scope="col" hidden="true">ID</th>
-                  <th scope="col">CODE NUMBER</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">UNIT</th>
+                  <th scope="col">COURSE CODE</th>
+                  <th scope="col">COURSE NAME</th>
+                  <th scope="col">DESCRIPTION</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="academicUnit:${academicUnits}">
-                  <td th:text="${academicUnit.acc_id}" hidden="true"></td>
-                  <td th:text="${academicUnit.acc_codeNumb}"></td>
-                  <td th:text="${academicUnit.name}"></td>
-                  <td th:text="${academicUnit.unit}"></td>
+                <tr th:each="courseDefinition:${courseDefinitions}">
+                  <td th:text="${courseDefinition.course_def_Id}" hidden="true"></td>
+                  <td th:text="${courseDefinition.courseCode}"></td>
+                  <td th:text="${courseDefinition.courseName}"></td>
+                  <td th:text="${courseDefinition.description}"></td>
                 </tr>
                 </tbody>
               </table>
@@ -91,7 +83,7 @@
 
   </main><!-- End #main -->
 
-  <th:block th:replace="/footer :: #footer"></th:block> <!--Link the footer -->
+  <th:block th:replace="/components/footer :: #footer"></th:block> <!--Link the footer -->
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -6,7 +6,6 @@ import com.jeanjuste.springmid24229.models.StudentRegistration;
 import com.jeanjuste.springmid24229.services.CourseService;
 import com.jeanjuste.springmid24229.services.StudentCourseService;
 import com.jeanjuste.springmid24229.services.StudentRegistrationService;
-import com.jeanjuste.springmid24229.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,7 @@ public class StudentCourseController {
         model.addAttribute("studentCourse", studentCourse);
         model.addAttribute("studentRegistrations", studentRegistrations);
         model.addAttribute("courses", courses);
-        return "StudentCourse";
+        return "StudentCourse/StudentCourse";
     }
 
     @PostMapping("/studentCourses/new")

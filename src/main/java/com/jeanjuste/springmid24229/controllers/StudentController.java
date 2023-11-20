@@ -33,7 +33,7 @@ public class StudentController {
         List<Student> students = studentService.findAllStudents();
         model.addAttribute("students", students);
         model.addAttribute("student", student);
-        return "Student";
+        return "Student/Student";
     }
 
 

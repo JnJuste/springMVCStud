@@ -26,7 +26,7 @@ public class TeacherController {
         List<Teacher> teachers = teacherService.findAllTeachers();
         model.addAttribute("teachers", teachers);
         model.addAttribute("teacher", teacher);
-        return "Teacher";
+        return "Teacher/Teacher";
     }
 
     @PostMapping("/teachers/new")

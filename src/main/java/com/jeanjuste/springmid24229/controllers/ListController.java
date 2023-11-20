@@ -8,9 +8,7 @@ import com.jeanjuste.springmid24229.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,13 +19,20 @@ public class ListController {
     private final StudentCourseRepository studentCourseRepository;
     private final CourseRepository courseRepository;
     private final StudentRegistrationRepository studentRegistrationRepository;
+    private final SemesterService semesterService;
+    private final AcademicUnitService academicUnitService;
+    private final CourseService courseService;
 
     @Autowired
     public ListController( StudentRegistrationRepository studentRegistrationRepository, CourseRepository courseRepository,
-                           StudentCourseRepository studentCourseRepository) {
+                           StudentCourseRepository studentCourseRepository, SemesterService semesterService,
+                           CourseService courseService, AcademicUnitService academicUnitService) {
         this.courseRepository = courseRepository;
         this.studentCourseRepository = studentCourseRepository;
         this.studentRegistrationRepository = studentRegistrationRepository;
+        this.courseService = courseService;
+        this.academicUnitService = academicUnitService;
+        this.semesterService = semesterService;
     }
     @GetMapping("/listCoursePerStudent")
     public String allLists(Model model) {
@@ -67,8 +72,22 @@ public class ListController {
         return null;
     }
 
-    @GetMapping("/listCoursePerDepartmentAndSemester")
-    public String getCoursePerDepartmentAndSemester(Model model){
-        return null;
+    @GetMapping("/listCoursesPerDepartment")
+    public String coursesByDepartmentForm(Model model) {
+        List<AcademicUnit> academicUnitList = academicUnitService.findAllAcademicUnits();
+        model.addAttribute("academicUnitList", academicUnitList);
+
+        return "/listCoursesPerDepartment";
+    }
+
+    @PostMapping("/{depId}/listOfCoursesByDepartment")
+    public String listOfCoursesByDepartmentForm(@PathVariable("depId") UUID depId, Model model) {
+        List<Object[]> listOfCoursesByDepartment = courseRepository.getCoursesByDepartment(depId);
+        List<AcademicUnit> academicUnitList = academicUnitService.findAllAcademicUnits();
+
+        model.addAttribute("academicUnitList", academicUnitList);
+        model.addAttribute("listOfCoursesByDepartment", listOfCoursesByDepartment);
+
+        return "/listCoursesPerDepartment";
     }
 }

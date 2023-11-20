@@ -41,7 +41,7 @@ public class StudentRegistrationController {
         model.addAttribute("semesters", semesters);
         model.addAttribute("studentList", studentList);
         model.addAttribute("academicUnits", academicUnits);
-        return "StudentRegistration";
+        return "StudentRegistration/StudentRegistration";
     }
 
     @PostMapping("/studentRegistrations/new")

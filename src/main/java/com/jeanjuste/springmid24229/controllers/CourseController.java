@@ -44,7 +44,7 @@ public class CourseController {
         model.addAttribute("teachers", teachers);
         model.addAttribute("semesters", semesters);
         model.addAttribute("courseDefinitions", courseDefinitions);
-        return "Course";
+        return "Course/Course";
     }
 
     @PostMapping("/courses/new")

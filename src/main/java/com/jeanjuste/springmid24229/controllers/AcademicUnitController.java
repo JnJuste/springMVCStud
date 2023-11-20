@@ -27,7 +27,7 @@ public class AcademicUnitController {
         List<AcademicUnit> academicUnits = academicUnitService.findAllAcademicUnits();
         model.addAttribute("academicUnits", academicUnits);
         model.addAttribute("academicUnit", academicUnit);
-        return "AcademicUnit";
+        return "AcademicUnit/AcademicUnit";
     }
 
     @PostMapping("/academicUnits/new")

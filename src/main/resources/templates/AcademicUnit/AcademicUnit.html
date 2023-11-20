@@ -1,35 +1,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="/header"></th:block>
+<th:block th:include="/components/header"></th:block>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>SEMESTER PAGE</h1>
+      <h1>ACADEMIC UNIT PAGE</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Semester Form</h5>
+          <h5 class="card-title">Academic Unit Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/semesters/new}" method="post" th:object="${semester}">
+          <form class="row g-3" th:action="@{/academicUnits/new}" method="post" th:object="${academicUnit}">
             <div class="col-12">
-              <label for="inputCode" class="form-label">Semester Code:</label>
-              <input type="text" class="form-control" id="inputCode" name="semCode" th:field="*{semCode}">
+              <label for="inputCode" class="form-label">Code Number:</label>
+              <input type="text" class="form-control" id="inputCode" name="acc_id" th:field="*{acc_codeNumb}">
             </div>
             <div class="col-12">
-              <label for="inputNames" class="form-label">Semester Name:</label>
-              <input type="text" class="form-control" id="inputNames" name="semNames" th:field="*{semNames}">
+              <label for="inputNames" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="inputNames" name="name" th:field="*{name}">
             </div>
 
             <div class="col-12">
-              <label for="inputSDate" class="form-label">Start Date:</label>
-              <input type="date" class="form-control" id="inputSDate" name="startDate" th:field="*{startDate}">
-            </div>
-            <div class="col-12">
-              <label for="inputEDate" class="form-label">End Date:</label>
-              <input type="date" class="form-control" id="inputEDate" name="endDate" th:field="*{endDate}">
+              <label class="col-sm-12 col-form-label">Unit:</label>
+              <div class="col-sm-12">
+                <select class="form-select" name="unit" id="unit" th:field="*{unit}">
+                  <option value="">SELECT</option>
+                  <option value="PROGRAM">PROGRAM</option>
+                  <option value="FACULTY">FACULTY</option>
+                  <option value="DEPARTMENT">DEPARTMENT</option>
+                </select>
+              </div>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -42,7 +45,7 @@
     </section>
 
     <div class="pagetitle">
-      <h1>SEMESTER TABLE</h1>
+      <h1>ACADEMIC UNIT TABLE</h1>
       <nav>
         <ol class="breadcrumb">
         </ol>
@@ -55,7 +58,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">LIST OF SEMESTERS</h5>
+              <h5 class="card-title">LIST OF ACADEMIC UNITS</h5>
               <p></p>
 
               <!-- Table with stripped rows -->
@@ -63,19 +66,17 @@
                 <thead>
                 <tr>
                   <th scope="col" hidden="true">ID</th>
-                  <th scope="col">SEMESTER CODE</th>
-                  <th scope="col">SEMESTER NAME</th>
-                  <th scope="col">START DATE</th>
-                  <th scope="col">END DATE</th>
+                  <th scope="col">CODE NUMBER</th>
+                  <th scope="col">NAME</th>
+                  <th scope="col">UNIT</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="semester:${semesters}">
-                  <td th:text="${semester.semID}" hidden="true"></td>
-                  <td th:text="${semester.semCode}"></td>
-                  <td th:text="${semester.semNames}"></td>
-                  <td th:text="${semester.startDate}"></td>
-                  <td th:text="${semester.endDate}"></td>
+                <tr th:each="academicUnit:${academicUnits}">
+                  <td th:text="${academicUnit.acc_id}" hidden="true"></td>
+                  <td th:text="${academicUnit.acc_codeNumb}"></td>
+                  <td th:text="${academicUnit.name}"></td>
+                  <td th:text="${academicUnit.unit}"></td>
                 </tr>
                 </tbody>
               </table>
@@ -90,7 +91,7 @@
 
   </main><!-- End #main -->
 
-  <th:block th:replace="/footer :: #footer"></th:block> <!--Link the footer -->
+  <th:block th:replace="/components/footer :: #footer"></th:block> <!--Link the footer -->
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

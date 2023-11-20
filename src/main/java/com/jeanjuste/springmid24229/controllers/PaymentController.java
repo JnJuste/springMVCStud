@@ -33,7 +33,7 @@ public class PaymentController {
         model.addAttribute("payments", payments);
         model.addAttribute("payment", payment);
         model.addAttribute("studentRegistrations", studentRegistrations);
-        return "Payment";
+        return "Payment/Payment";
     }
 
     @PostMapping("/payments/new")

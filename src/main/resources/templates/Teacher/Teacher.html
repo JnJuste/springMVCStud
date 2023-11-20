@@ -1,30 +1,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="/header"></th:block>
+<th:block th:include="/components/header"></th:block>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>COURSE DEFINITION PAGE</h1>
+      <h1>TEACHER PAGE</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Course Definition Form</h5>
+          <h5 class="card-title">Teacher Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/courseDefinitions/new}" method="post" th:object="${courseDefinition}">
+          <form class="row g-3" th:action="@{/teachers/new}" method="post" th:object="${teacher}">
             <div class="col-12">
-              <label for="inputCode" class="form-label">Code Number:</label>
-              <input type="text" class="form-control" id="inputCode" name="courseCode" th:field="*{courseCode}">
+              <label for="inputCode" class="form-label">Teacher Code:</label>
+              <input type="text" class="form-control" id="inputCode" name="codeTeach" th:field="*{codeTeach}">
             </div>
             <div class="col-12">
-              <label for="inputNames" class="form-label">Name:</label>
-              <input type="text" class="form-control" id="inputNames" name="courseName" th:field="*{courseName}">
+              <label for="inputNames" class="form-label">Teacher Names:</label>
+              <input type="text" class="form-control" id="inputNames" name="namesTeach" th:field="*{namesTeach}">
             </div>
             <div class="col-12">
-              <label for="inputDescription" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="inputDescription" name="description" th:field="*{description}">
+              <label class="col-sm-12 col-form-label">Qualification:</label>
+              <div class="col-sm-12">
+                <select class="form-select" name="qualification" id="qualification" th:field="*{qualification}">
+                  <option value="">SELECT</option>
+                  <option value="MASTER">MASTER</option>
+                  <option value="PHD">PHD</option>
+                  <option value="PROFESSOR">PROFESSOR</option>
+                </select>
+              </div>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -36,8 +43,9 @@
       </div>
     </section>
 
+
     <div class="pagetitle">
-      <h1>COURSE DEFINITION TABLE</h1>
+      <h1>TEACHER TABLE</h1>
       <nav>
         <ol class="breadcrumb">
         </ol>
@@ -50,25 +58,25 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">LIST OF COURSE DEFINITIONS</h5>
+              <h5 class="card-title">LIST OF TEACHERS</h5>
               <p></p>
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                 <tr>
-                  <th scope="col" hidden="true">ID</th>
-                  <th scope="col">COURSE CODE</th>
-                  <th scope="col">COURSE NAME</th>
-                  <th scope="col">DESCRIPTION</th>
+                  <th scope="col" hidden="true">TEACHER ID</th>
+                  <th scope="col">TEACHER CODE</th>
+                  <th scope="col">TEACHER NAME</th>
+                  <th scope="col">QUALIFICATION</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="courseDefinition:${courseDefinitions}">
-                  <td th:text="${courseDefinition.course_def_Id}" hidden="true"></td>
-                  <td th:text="${courseDefinition.courseCode}"></td>
-                  <td th:text="${courseDefinition.courseName}"></td>
-                  <td th:text="${courseDefinition.description}"></td>
+                <tr th:each="teacher:${teachers}">
+                  <td th:text="${teacher.idTeach}" hidden="true"></td>
+                  <td th:text="${teacher.codeTeach}"></td>
+                  <td th:text="${teacher.namesTeach}"></td>
+                  <td th:text="${teacher.qualification}"></td>
                 </tr>
                 </tbody>
               </table>
@@ -83,7 +91,7 @@
 
   </main><!-- End #main -->
 
-  <th:block th:replace="/footer :: #footer"></th:block> <!--Link the footer -->
+  <th:block th:replace="/components/footer :: #footer"></th:block> <!--Link the footer -->
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

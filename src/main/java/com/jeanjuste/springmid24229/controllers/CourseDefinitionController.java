@@ -27,7 +27,7 @@ public class CourseDefinitionController {
         List<CourseDefinition> courseDefinitions = courseDefinitionService.findAllCourseDefinitions();
         model.addAttribute("courseDefinitions", courseDefinitions);
         model.addAttribute("courseDefinition", courseDefinition);
-        return "CourseDefinition";
+        return "CourseDefinition/CourseDefinition";
     }
 
     @PostMapping("/courseDefinitions/new")
