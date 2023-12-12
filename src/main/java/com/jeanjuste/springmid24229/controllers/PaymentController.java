@@ -15,8 +15,8 @@ import java.util.List;
 
 @Controller
 public class PaymentController {
-    private StudentRegistrationService studentRegistrationService;
-    private PaymentService paymentService;
+    private final StudentRegistrationService studentRegistrationService;
+    private final PaymentService paymentService;
 
 
     @Autowired

@@ -10,10 +10,10 @@
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Student Form</h5>
+          <h5 class="card-title">Student Update Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" th:action="@{/students/new}" method="post" th:object="${student}">
+          <form class="row g-3" th:action="@{/all_students/{student_id}/edit(student_id=${student.student_id})}" method="post" th:object="${student}">
             <div class="col-12">
               <label for="inputCode" class="form-label">Student Code:</label>
               <input type="text" class="form-control" id="inputCode" name="regNo" th:field="*{regNo}">

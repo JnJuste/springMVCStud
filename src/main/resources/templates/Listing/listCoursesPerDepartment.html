@@ -1,10 +1,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="/header"></th:block>
+<th:block th:include="/Components/header"></th:block>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>LIST COURSE PER STUDENT</h1>
+      <h1>LIST COURSE PER DEPARTMENT</h1>
+      <p>Select Department</p>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -13,19 +14,19 @@
           <h5 class="card-title">Listing Form</h5>
 
           <!-- Vertical Form -->
-          <form class="row g-3" method="get" th:action="@{/listCoursesPerDepartment}" th:object="${studentRegistration}">
+          <form class="row g-3" method="get" th:action="@{/lists/{course_ID}/listCoursesPerDepartment}">
             <div class="col-12">
-              <label class="col-sm-12 col-form-label">CHOOSE THE STUDENT:</label>
+              <label class="col-sm-12 col-form-label">DEPARTMENT:</label>
               <div class="col-sm-12">
-                <select class="form-select" name="studReg_id" id="studReg_id" th:field="*{studReg_id}">
-                  <th:block th:each="stud: ${studentRegistrations}">
-                    <option th:if="${stud.studReg_id}" th:value="${stud.studReg_id}">[[${stud.student.regNo}]] - [[${stud.student.studNames}]]</option>
+                <select class="form-select" name="studReg_id" id="studReg_id">
+                  <th:block th:each="acad: ${academicUnitList}">
+                    <option th:if="${acad.unit.name == 'DEPARTMENT'}" th:value="${acad.acc_id}">[[${acad.name}}]]</option>
                   </th:block>
                 </select>
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary">Find</button>
+              <button type="submit" class="btn btn-primary">VIEW LIST</button>
               <!--<button type="reset" class="btn btn-secondary">Reset</button> -->
             </div>
           </form><!-- Vertical Form -->
@@ -57,17 +58,13 @@
                     <th scope="col" hidden="true">COURSE ID</th>
                     <th scope="col">COURSE CODE</th>
                     <th scope="col">COURSE NAME</th>
-                    <th scope="col">CREDITS</th>
-                    <th scope="col">RESULTS</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="cour: ${courseList}">
-                    <td th:text="${cour.stud_CourseId}" hidden="true"></td>
-                    <td th:text="${cour.course.courseDefinition.courseCode}"></td>
-                    <td th:text="${cour.course.courseDefinition.courseName}"></td>
-                    <td th:text="${cour.credits}"></td>
-                    <td th:text="${cour.results}"></td>
+                  <tr th:each="courseByDep: ${listOfCoursesByDepartment}">
+                    <td th:text="${courseByDep[0]}" hidden="true"></td>
+                    <td th:text="${courseByDep[1]}"></td>
+                    <td th:text="${courseByDep[2]}"></td>
                   </tr>
                   </tbody>
                 </table>
@@ -82,7 +79,7 @@
 
   </main><!-- End #main -->
 
-  <th:block th:replace="/footer :: #footer"></th:block> <!--Link the footer -->
+  <th:block th:replace="/Components/footer :: #footer"></th:block> <!--Link the footer -->
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

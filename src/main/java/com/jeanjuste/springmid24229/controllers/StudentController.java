@@ -44,12 +44,12 @@ public class StudentController {
     }
 
     // get edit information
-    @GetMapping("/{studId}/edit")
-    public String editStudentForm(@PathVariable("studId") UUID studId, Model model) {
+    @GetMapping("/{student_id}/edit")
+    public String editStudentForm(@PathVariable("student_id") UUID student_id, Model model) {
         try {
-            Optional<Student> student = studentRepository.findById(studId);
+            Optional<Student> student = studentRepository.findById(student_id);
             model.addAttribute("student", student);
-            return "Student/student-edit";
+            return "Student/Student-edit";
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return "redirect:/all_students?fail";
@@ -57,10 +57,10 @@ public class StudentController {
     }
 
     // update student
-    @PostMapping("/{studId}/edit")
-    public String editStudent(@PathVariable("studId") UUID studId, @ModelAttribute("student") Student student) {
+    @PostMapping("/{student_id}/edit")
+    public String editStudent(@PathVariable("student_id") UUID student_id, @ModelAttribute("student") Student student) {
         try {
-            student.setStudent_id(studId);
+            student.setStudent_id(student_id);
             studentService.updateStudent(student);
             return "redirect:/all_students?success";
         } catch (Exception ex) {

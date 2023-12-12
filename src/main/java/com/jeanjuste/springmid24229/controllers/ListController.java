@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 @Controller
-//@RequestMapping("/lists")
+@RequestMapping("/lists")
 public class ListController {
 
     private final StudentCourseRepository studentCourseRepository;
@@ -54,7 +54,7 @@ public class ListController {
         model.addAttribute("listOfStudentsBySemester", listOfStudentsBySemester);
         model.addAttribute("listOfStudentsByDepartment", listOfStudentsByDepartment);
 
-        return "listCoursePerStudent";
+        return "Listing/listCoursePerStudent";
     }
 
     @GetMapping("/listStudentPerSemester")
@@ -77,7 +77,7 @@ public class ListController {
         List<AcademicUnit> academicUnitList = academicUnitService.findAllAcademicUnits();
         model.addAttribute("academicUnitList", academicUnitList);
 
-        return "/listCoursesPerDepartment";
+        return "Listing/listCoursesPerDepartment";
     }
 
     @PostMapping("/{depId}/listOfCoursesByDepartment")
@@ -88,6 +88,6 @@ public class ListController {
         model.addAttribute("academicUnitList", academicUnitList);
         model.addAttribute("listOfCoursesByDepartment", listOfCoursesByDepartment);
 
-        return "/listCoursesPerDepartment";
+        return "Listing/listCoursesPerDepartment";
     }
 }
